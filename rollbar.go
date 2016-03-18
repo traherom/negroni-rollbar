@@ -4,7 +4,7 @@
 //
 //  import (
 //    "github.com/codegangsta/negroni"
-//    "github.com/jfbus/negroni-rollbar"
+//    "github.com/traherom/negroni-rollbar"
 //  )
 //
 //
@@ -30,16 +30,10 @@ import (
 	rb "github.com/stvp/rollbar"
 )
 
-type Config struct {
-	Token string
-}
-
 type report struct{}
 
 // Report returns a middleware that recovers from any panics, sends the error to rollbar and writes a HTTP 500 response.
-func Report(cfg Config) negroni.Handler {
-	rb.Token = cfg.Token
-	rb.Environment = "production"
+func NewReport() negroni.Handler {
 	return &report{}
 }
 
